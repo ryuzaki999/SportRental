@@ -29,14 +29,6 @@
             ประวัติการจอง
           </button>
         </router-link>
-        <router-link :to="{ name: 'equipment' }" custom v-slot="{ navigate, isActive }">
-          <button
-            @click="navigate"
-            :class="[navLinkBaseClass, isActive ? navLinkActiveClass : navLinkInactiveClass]"
-          >
-            อุปกรณ์
-          </button>
-        </router-link>
         <router-link v-if="isAdmin" :to="{ name: 'admin-dashboard' }" custom v-slot="{ navigate, isActive }">
           <button
             @click="navigate"
@@ -101,14 +93,6 @@
               :class="[mobileNavLinkBaseClass, isActive ? mobileNavLinkActiveClass : mobileNavLinkInactiveClass]"
             >
               ประวัติการจอง
-            </button>
-          </router-link>
-          <router-link :to="{ name: 'equipment' }" custom v-slot="{ navigate, isActive }">
-            <button
-              @click="navigateAndClose(navigate)"
-              :class="[mobileNavLinkBaseClass, isActive ? mobileNavLinkActiveClass : mobileNavLinkInactiveClass]"
-            >
-              อุปกรณ์
             </button>
           </router-link>
           <router-link v-if="isAdmin" :to="{ name: 'admin-dashboard' }" custom v-slot="{ navigate, isActive }">
