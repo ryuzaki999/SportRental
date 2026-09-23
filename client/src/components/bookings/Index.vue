@@ -113,6 +113,13 @@
               >
                 ดูรายละเอียด
               </router-link>
+              <router-link
+                v-if="b.status === 'pending-payment' || b.status === 'pending'"
+                :to="{ name: 'checkout', query: { bookingId: b.id } }"
+                class="link-pay"
+              >
+                ชำระเงิน
+              </router-link>
               <button
                 v-if="b.status !== 'cancelled' && b.status !== 'checked-in'"
                 @click="cancel(b)"
@@ -422,6 +429,16 @@ export default {
 }
 
 .link-primary:hover {
+  text-decoration: underline;
+}
+
+.link-pay {
+  color: #b45309;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.link-pay:hover {
   text-decoration: underline;
 }
 

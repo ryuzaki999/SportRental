@@ -17,6 +17,13 @@
             {{ booking.status || 'pending' }}
           </span>
           <button
+            v-if="canPay"
+            class="pay-btn"
+            @click="goToPayment"
+          >
+            ไปชำระเงิน
+          </button>
+          <button
             v-if="canCheckin"
             class="primary-btn"
             @click="doCheckin"
@@ -146,9 +153,18 @@ export default {
         console.error('Checkin failed', e)
         alert(e.response && e.response.data && e.response.data.error ? e.response.data.error : 'เช็คอินล้มเหลว')
       } finally { this.loadingCheckin = false }
+    },
+    goToPayment () {
+      this.$router.push({ name: 'checkout', query: { bookingId: this.booking.id } })
     }
   },
   computed: {
+    canPay () {
+      const b = this.booking
+      if (!b || !b.id) return false
+      if (b.paid) return false
+      return b.status === 'pending-payment' || b.status === 'pending'
+    },
     canCheckin () {
       try {
         const auth = useAuthenStore()
@@ -257,6 +273,23 @@ export default {
 .primary-btn[disabled] {
   opacity: 0.7;
   cursor: default;
+}
+
+.pay-btn {
+  border-radius: 999px;
+  padding: 0.45rem 1.1rem;
+  border: none;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #fffbeb;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(217, 119, 6, 0.4);
+  transition: transform 0.15s ease;
+}
+
+.pay-btn:hover {
+  transform: translateY(-1px);
 }
 
 .booking-info {

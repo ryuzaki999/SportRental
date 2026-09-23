@@ -183,7 +183,13 @@ export default {
         if (payload.startTime) payload.startTime = new Date(payload.startTime).toISOString()
         if (payload.endTime) payload.endTime = new Date(payload.endTime).toISOString()
         const res = await BookingService.post(payload)
-        this.$router.push({ name: 'bookings' })
+        // สร้างการจองสำเร็จ → พาไปหน้าชำระเงิน (checkout) พร้อมเลขที่การจอง
+        const bookingId = res && res.data && res.data.id
+        if (bookingId) {
+          this.$router.push({ name: 'checkout', query: { bookingId } })
+        } else {
+          this.$router.push({ name: 'bookings' })
+        }
       } catch (err) {
         console.error(err)
         alert(err.response && err.response.data && err.response.data.error ? err.response.data.error : 'Booking failed')

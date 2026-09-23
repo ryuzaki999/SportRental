@@ -1,6 +1,9 @@
 import { useAuthenStore } from '@/stores/authen'
 import { createRouter, createWebHistory } from 'vue-router'
 
+// ===== Landing =====
+import HomeView from '../views/HomeView.vue'
+
 // ===== Users =====
 import UserCreate from '../components/Users/CreateUser.vue'
 import UserEdit from '../components/Users/EditUser.vue'
@@ -44,7 +47,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      redirect: { name: 'fields' }
+      component: HomeView
     },
     // ---------- User Routes ----------
     // {

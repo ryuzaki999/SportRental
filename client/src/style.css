@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* Tailwind v4: import เฉพาะ theme + utilities (ไม่ import preflight
+   เพื่อไม่ให้ base reset ไปกระทบ layout/CSS เดิมของโปรเจกต์) */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 
 :root {
   --font-ui: 'Sarabun', 'Noto Sans Thai', 'Prompt', 'Segoe UI', sans-serif;

@@ -94,6 +94,7 @@
 </template>
 
 <script>
+import Api from '@/services/Api';
 import FieldService from '@/services/FieldService';
 import { io as ioClient } from 'socket.io-client';
 import CalendarBooking from './CalendarBooking.vue';
@@ -119,7 +120,7 @@ export default {
       }
       // load availability for next 7 days
       try {
-        const api = (await import('@/services/Api')).default()
+        const api = Api()
         const now = new Date()
         const until = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
         const r = await api.get(`field/${fieldId}/availability`, { params: { start: now.toISOString(), end: until.toISOString() } })
